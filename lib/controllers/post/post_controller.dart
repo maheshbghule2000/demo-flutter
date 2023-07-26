@@ -18,6 +18,7 @@ class PostController extends GetxController {
       _isDataLoading(false);
     }, (data) async {
       postResponseModel = data;
+      // ignore: avoid_print
       print(data);
       _isDataLoading(false);
       print(data);
