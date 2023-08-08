@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pagination_demo/utils/initial_binding.dart';
 import 'package:pagination_demo/utils/routes.dart';
-
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get_storage/get_storage.dart';
 // void main() {
 //   runApp(const MyApp());
 // }
@@ -20,13 +20,21 @@ Future<void> main() async {
     yield LicenseEntryWithLineBreaks(['google_fonts'], license);
   });
   // setPathUrlStrategy();
+  WidgetsFlutterBinding.ensureInitialized();
+  final SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+  await GetStorage.init();
   initialBinding();
-  runApp(const MyApp());
+  runApp(MyApp(
+    prefs: sharedPreferences,
+  ));
 }
 
 class MyApp extends StatefulWidget {
+  final SharedPreferences? prefs;
   const MyApp({
     Key? key,
+    this.prefs,
   }) : super(key: key);
 
   @override
@@ -46,7 +54,7 @@ class _MyAppState extends State<MyApp> {
         designSize: const Size(360, 690),
         builder: (BuildContext context, child) {
           return GetMaterialApp.router(
-            title: 'Innoveri infoTech',
+            title: 'Demo',
             theme: ThemeData(fontFamily: 'Kumbh Sans'),
             themeMode: ThemeMode.system,
             debugShowCheckedModeBanner: false,

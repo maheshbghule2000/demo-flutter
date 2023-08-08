@@ -49,8 +49,6 @@ class AppSizes {
   static const double const22PxTextSizeWeb = 22.0;
   static const double const30PxTextSizeWeb = 30.0;
 
-
-
   static double getPhoneSize(double size) {
     return size * (Get.width / 428);
   }

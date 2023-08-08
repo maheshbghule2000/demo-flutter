@@ -19,6 +19,6 @@ class AppColors {
   static const Color faintGreenColor = Color.fromARGB(133, 112, 218, 177);
   static const Color faintContainerColor = Color(0xffE8E8E8);
   static const Color faintorangeColor = Color.fromARGB(196, 238, 187, 130);
-  static const Color alertbox =Color(0xffFFBBB2);
-
+  static const Color alertbox = Color(0xffFFBBB2);
+  static const Color bluecolor = Color(0xff243594);
 }

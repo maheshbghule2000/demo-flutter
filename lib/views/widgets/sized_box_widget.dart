@@ -12,7 +12,6 @@ class SizedBoxWidget extends StatelessWidget {
   final double? width;
   final double? height;
   final Widget? child;
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(

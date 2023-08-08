@@ -9,8 +9,23 @@ class StartController extends GetxController {
     context.go(Routes.postRoute);
     refresh();
   }
+
   void gotoproductPage(BuildContext context) {
     context.go(Routes.productRoute);
+    refresh();
+  }
+
+  void gotoSignInPage(BuildContext context) {
+    context.go(Routes.signIn);
+    refresh();
+  }
+
+  void gotoSignUpPage(BuildContext context) {
+    context.go(Routes.signUp);
+    refresh();
+  }
+  void gotoDashboard(BuildContext context) {
+    context.go(Routes.dashboard);
     refresh();
   }
 }

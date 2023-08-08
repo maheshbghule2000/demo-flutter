@@ -1,7 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pagination_demo/views/screens/sign_in/sign_in.dart';
+import 'package:pagination_demo/views/screens/sign_up/sign_up.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../consts/app_colors.dart';
 import '../../../consts/app_sizes.dart';
 import '../../../consts/app_strings.dart';
@@ -10,9 +15,37 @@ import '../../widgets/sized_box_widget.dart';
 import '../../widgets/text_widget.dart';
 import '../../widgets/transparant_button_widget.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   SplashScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
   final StartController _startController = Get.find();
+  @override
+  void initState() {
+    getValidationData().whenComplete(() async {
+      Timer(Duration(seconds: 2), () {
+        SignUpScreen();
+      });
+    });
+    super.initState();
+  }
+
+  late String FinalEmail; // FinalEmail remains non-nullable
+
+  Future<void> getValidationData() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    var obtainedEmail = sharedPreferences.getString('email');
+    setState(() {
+      FinalEmail = obtainedEmail ?? '';
+      print(FinalEmail); // Use null-aware assignment with a default value
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -59,7 +92,7 @@ class SplashScreen extends StatelessWidget {
           ),
           TextWidget(
             context: context,
-            data: 'Innover infoTech',
+            data: AppStrings.name,
             color: AppColors.blackColor,
             fontWeight: FontWeight.w600,
             fontSize: 22.sp,
@@ -75,7 +108,7 @@ class SplashScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            AppStrings.name,
+            AppStrings.synkrama,
             style: GoogleFonts.baiJamjuree(
               fontWeight: FontWeight.bold,
               color: AppColors.blackColor,
@@ -83,7 +116,7 @@ class SplashScreen extends StatelessWidget {
             ),
           ),
           Text(
-            AppStrings.infoTech,
+            AppStrings.technologies,
             style: GoogleFonts.baiJamjuree(
               fontWeight: FontWeight.bold,
               color: AppColors.blackColor,
@@ -100,7 +133,7 @@ class SplashScreen extends StatelessWidget {
             width: 140,
             height: 40,
             onPressed: () {
-              _startController.gotoproductPage(context);
+              _startController.gotoSignInPage(context);
             },
           ),
         ],
@@ -126,7 +159,7 @@ class SplashScreen extends StatelessWidget {
           ),
           TextWidget(
             context: context,
-            data: 'Innover infoTech',
+            data: 'Synkrama Technologies',
             color: AppColors.blackColor,
             fontSize: AppSizes.bodyLargeTextSizePhone.sp,
           ),
